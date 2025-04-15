@@ -8,7 +8,7 @@ body {
     background-color: #2d2d2d;
     color: #00ff00;
     font-family: 'Consolas', 'Courier New', Courier, monospace;
-    height: 100vh;
+    height: 100%;
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
@@ -16,26 +16,29 @@ body {
     overflow: hidden;
     position: relative;
     filter: contrast(1.3) brightness(0.9) saturate(1.2);
-    animation: flicker 0.15s infinite;
 }
 
 .tabs {
     display: flex;
-    padding: 10px;
     background-color: #1e1e1e;
     width: 100%;
     border-bottom: 1px solid #333;
+    z-index: 3;
 }
 
 .tab {
     color: #00ff00;
-    padding: 10px 20px;
+    padding: 3% 3%;
+    /*
+        First value: top bar height
+        Second value: horizontal elements spacing
+    */
+    
     cursor: pointer;
 }
 
-
 .terminal-body {
-    padding: 20px;
+    padding: 5%;
     width: 100%;
     height: calc(100vh - 40px);
     overflow-y: auto;
@@ -46,6 +49,7 @@ body {
     font-size: 16px;
     position: relative;
     z-index: 1;
+    animation: flicker 1.5s alternate infinite;
 }
 
 .prompt {
@@ -55,7 +59,7 @@ body {
 
 @keyframes flicker {
     0%, 100% { opacity: 1; }
-    50% { opacity: 0.9; }
+    50% { opacity: 0.98; }
 }
 
 @keyframes crt-lines {
@@ -75,10 +79,17 @@ body::before {
         rgba(255, 255, 255, 0.1) 50%, 
         rgba(0, 0, 0, 0.1) 50%
     );
-    background-size: 100% 2px;
+    background-size: 100% 1%;
+    /*
+        The second value is the CRT lines height. We want to keep it responsive, so 1% it is
+    */
+    
     z-index: 2;
-    opacity: 0.2;
-    animation: crt-lines 0.5s linear infinite;
+    opacity: 0.1;
+    animation: crt-lines 15s linear infinite;
+    /*
+        We now use 15s of effect time to make it slow enough for a user to appreciate it.
+    */
 }
 
 
